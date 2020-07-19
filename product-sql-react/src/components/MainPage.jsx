@@ -8,7 +8,9 @@ import MyShop from "./Shop.jsx";
 class Homepage extends React.Component {
     
     state={
-        category: ''
+        category: '',
+        // productid:'',
+        // userid:''
     }
 
     displayCategory = (category) => {
@@ -19,8 +21,15 @@ class Homepage extends React.Component {
         this.props.addToCart(count)
     }
 
+    updateCart = (productid, userid) => {
+        //this.setState({productid,userid})
+        this.props.updateCartInfo(productid,userid)
+    }
+
 
     render(){
+        console.log(this.state.productid)
+        console.log(this.state.userid)
         return (
             <>
                 <>
@@ -29,7 +38,11 @@ class Homepage extends React.Component {
                           <Sidebar showCategory={this.displayCategory}/>
                         </Col>
                         <Col xs={10} id="page-content-wrapper">
-                          <MyShop displayCategory={this.state.category} updateCart={this.incrementCart} />
+                          <MyShop 
+                            displayCategory={this.state.category} 
+                            updateCart={this.incrementCart} 
+                            sendCartUpdate={this.updateCart}
+                          />
                         </Col> 
                     </Row>
     
