@@ -28,12 +28,28 @@ class NavBar extends React.Component {
                             >
                             Home
                         </Link>
+                        <Link to="/backoffice"
+                            className={
+                                this.props.location.pathname === '/backoffice'
+                                ? "nav-link active"
+                                : "nav-link"
+                            }
+                            >
+                            Backoffice
+                        </Link>
                     </Nav>
                     {/* <Nav>
                         <Nav.Link href="#">Search</Nav.Link>
                     </Nav> */}
-                    <FontAwesomeIcon icon={faCartPlus} className="mt-4" onClick={()=>this.props.history.push("/checkout")}/>
-                    <Badge variant="info">{this.props.updateProductInCart ?this.props.updateProductInCart :0}</Badge>
+                    {this.props.location.pathname === '/backoffice'
+                    ?null
+                    :   (
+                            <>
+                                <FontAwesomeIcon icon={faCartPlus} className="mt-4" onClick={()=>this.props.history.push("/checkout")}/>
+                                <Badge variant="info">{this.props.updateProductInCart ?this.props.updateProductInCart :0}</Badge>
+                            </>
+                        )
+                    }
                 </Navbar.Collapse>
             </Navbar>
         )
