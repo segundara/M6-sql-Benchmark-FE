@@ -19,41 +19,43 @@ class Details extends Component {
 
     state = {
         product: [],
+        productid: null,
         addReview: false,
         editModal: false,
         newReview: {
             comment: "",
             rate: 1
         },
-        editProductInfo: {
-            name: "",
-            brand: "",
-            description: "",
-            imageUrl: '',
-            price: null,
-            category: ''
-        },
+        // editProductInfo: {
+        //     name: "",
+        //     brand: "",
+        //     description: "",
+        //     imageUrl: '',
+        //     price: null,
+        //     category: ''
+        // },
         reviews: [],
         photo: ''
     }
 
 
-    editInfo = (event) => {
-        const editProductInfo = this.state.editProductInfo
+    // editInfo = (event) => {
+    //     const editProductInfo = this.state.editProductInfo
 
-        if (event.currentTarget.id === "price") {
-            editProductInfo[event.currentTarget.id] = parseInt(event.currentTarget.value)
-        } else {
-            editProductInfo[event.currentTarget.id] = event.currentTarget.value
-        }
-        this.setState({ editProductInfo })
-    }
+    //     if (event.currentTarget.id === "price") {
+    //         editProductInfo[event.currentTarget.id] = parseInt(event.currentTarget.value)
+    //     } else {
+    //         editProductInfo[event.currentTarget.id] = event.currentTarget.value
+    //     }
+    //     this.setState({ editProductInfo })
+    // }
 
     handleChange = (e) => {
         const newReview = this.state.newReview
         if (e.currentTarget.id === "rate") {
             newReview[e.currentTarget.id] = parseInt(e.currentTarget.value)
-        } else {
+        } 
+        else {
             newReview[e.currentTarget.id] = e.currentTarget.value
         }
 
@@ -63,106 +65,125 @@ class Details extends Component {
     }
 
     fetchDetails = async () => {
-        const resp = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id + "/reviews")
+        const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
         if (resp.ok) {
             const details = await resp.json()
             this.setState({
-                reviews: details.productReviews.reviews,
-                product: details.productReviews
+                product: details.data
+            });
+        }
+        const response = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id + "/reviews")
+        if (response.ok) {
+            const details = await response.json()
+            this.setState({
+                reviews: details.data
             });
         }
     }
 
     addReview = async (e) => {
         e.preventDefault()
-        const resp = await fetch("http://127.0.0.1:3004/reviews", {
+        
+        const reviewBody = ({...this.state.newReview, "productid": this.props.match.params.id})
+        
+        const resp = await fetch("http://127.0.0.1:3234/reviews", {
             method: "POST",
-            body: JSON.stringify(this.state.newReview),
+            body: JSON.stringify(reviewBody),
             headers: {
                 "Content-Type": "application/json"
             }
         })
         if (resp.ok) {
-            const res = await fetch("http://127.0.0.1:3004/reviews")
-            if (res.ok) {
-                const reviews = await res.json()
-                const newRev = reviews.pop()
-                console.log(newRev)
-                console.log(newRev._id)
-                
-                const proRev = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id)
-                if (proRev.ok) {
-                    const product = await proRev.json()
-                    const revArr = product.product.reviews
-                    revArr.push(newRev)
-                    console.log(revArr)
-                    const allReviews = revArr.map(review => review._id)
-                    console.log(allReviews)
-
-                    const updateReviews = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id, {
-                        method: "PUT",
-                        body: JSON.stringify({reviews: allReviews}),
-                        headers: {
-                            "Content-Type": "application/json"
-                        }
-                    })
-                    if(updateReviews.ok){
-                        this.setState({
-                            addReview: false,
-                            newReview: {
-                                comment: "",
-                                rate: null
-                            },
-                        });
-                        
-                        this.fetchDetails()
-                    }else console.log('noooooo');
-                    
-                }
-            }
-        }
-    }
-
-    editProduct = async () => {
-        const resp = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id)
-
-        if (resp.ok) {
-            const product = await resp.json()
+            
             this.setState({
-                editProductInfo: {
-                    name: product.product.name,
-                    brand: product.product.brand,
-                    description: product.product.description,
-                    imageUrl: product.product.imageUrl,
-                    price: parseInt(product.product.price),
-                    category: product.product.category
+                addReview: false,
+                newReview: {
+                    comment: "",
+                    rate: null
                 },
-                editModal: true
             });
+            
+            this.fetchDetails()
+            // const res = await fetch("http://127.0.0.1:3234/reviews")
+            // if (res.ok) {
+            //     const reviews = await res.json()
+            //     const newRev = reviews.pop()
+            //     console.log(newRev)
+            //     console.log(newRev._id)
+                
+            //     const proRev = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
+            //     if (proRev.ok) {
+            //         const product = await proRev.json()
+            //         const revArr = product.product.reviews
+            //         revArr.push(newRev)
+            //         console.log(revArr)
+            //         const allReviews = revArr.map(review => review._id)
+            //         console.log(allReviews)
+
+            //         const updateReviews = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
+            //             method: "PUT",
+            //             body: JSON.stringify({reviews: allReviews}),
+            //             headers: {
+            //                 "Content-Type": "application/json"
+            //             }
+            //         })
+            //         if(updateReviews.ok){
+            //             this.setState({
+            //                 addReview: false,
+            //                 newReview: {
+            //                     comment: "",
+            //                     rate: null
+            //                 },
+            //             });
+                        
+            //             this.fetchDetails()
+            //         }else console.log('noooooo');
+                    
+            //     }
+            // }
         }
     }
 
-    deleteProduct = async () => {
-        const resp = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id, {
-            method: "DELETE"
-        })
-        if (resp.ok) {
-            this.props.history.push("/")
-        }
-    }
+    // editProduct = async () => {
+    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
+
+    //     if (resp.ok) {
+    //         const product = await resp.json()
+    //         this.setState({
+    //             editProductInfo: {
+    //                 name: product.product.name,
+    //                 brand: product.product.brand,
+    //                 description: product.product.description,
+    //                 imageUrl: product.product.imageUrl,
+    //                 price: parseInt(product.product.price),
+    //                 category: product.product.category
+    //             },
+    //             editModal: true
+    //         });
+    //     }
+    // }
+
+    // deleteProduct = async () => {
+    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
+    //         method: "DELETE"
+    //     })
+    //     if (resp.ok) {
+    //         this.props.history.push("/")
+    //     }
+    // }
 
     componentDidMount() {
         this.fetchDetails()
     }
 
-    saveImg = (e) => {
-        this.setState({
-            photo: e.target.files[0]
-        });
-    }
+    // saveImg = (e) => {
+    //     this.setState({
+    //         photo: e.target.files[0]
+    //     });
+    // }
 
     deleteReview = async (id) => {
-        const resp = await fetch("http://127.0.0.1:3004/reviews/" + id, {
+        const resp = await fetch("http://127.0.0.1:3234/reviews/" + id, {
             method: "DELETE"
         })
 
@@ -170,37 +191,38 @@ class Details extends Component {
 
     }
 
-    updateProduct = async (e) => {
-        e.preventDefault()
-        const data = new FormData()
-        data.append("product", this.state.photo)
+    // updateProduct = async (e) => {
+    //     e.preventDefault()
+    //     const data = new FormData()
+    //     data.append("product", this.state.photo)
 
-        const resp = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id, {
-            method: "PUT",
-            body: JSON.stringify(this.state.editProductInfo),
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
+    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
+    //         method: "PUT",
+    //         body: JSON.stringify(this.state.editProductInfo),
+    //         headers: {
+    //             "Content-Type": "application/json"
+    //         }
+    //     })
 
-        let addPhoto = await fetch("http://127.0.0.1:3004/products/" + this.props.match.params.id + "/upload", {
-            method: "POST",
-            body: data
-        })
+    //     let addPhoto = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id + "/upload", {
+    //         method: "POST",
+    //         body: data
+    //     })
 
-        if (resp.ok) {
-            this.setState({
-                editModal: false
-            });
-            this.fetchDetails()
-        }
+    //     if (resp.ok) {
+    //         this.setState({
+    //             editModal: false
+    //         });
+    //         this.fetchDetails()
+    //     }
 
-    }
+    // }
 
 
 
     render() {
-        // console.log(this.props)
+        console.log(this.state.reviews)
+        console.log(this.state.product)
         return (
             <div>
                 <Container className="py-5">
@@ -208,7 +230,7 @@ class Details extends Component {
                         {this.state.product &&(
                             <>
                                 <Col md={6} className="mt-5">
-                                    <Image src={this.state.product.imageUrl} style={{ height: "50vh", width: "25rem" }} />
+                                    <Image src={this.state.product.image_url} style={{ height: "50vh", width: "25rem" }} />
                                 </Col>
                                 <Col md={6} className="mt-5 text-center">
                                     <div>
@@ -223,7 +245,7 @@ class Details extends Component {
                                     <div className="mb-3">
                                         <Button onClick={() => this.setState({ addReview: true })}>Add review</Button>
                                     </div>
-                                    <div className="d-flex justify-content-center">
+                                    {/* <div className="d-flex justify-content-center">
                                         <Button
                                             variant="danger"
                                             className="mr-3"
@@ -233,7 +255,7 @@ class Details extends Component {
                                             variant="warning"
                                             onClick={() => this.editProduct()}
                                         >Edit</Button>
-                                    </div>
+                                    </div> */}
                                     <div className="d-flex justify-content-center mt-4">
                                         {this.state.reviews.length > 0 ?
                                             <Accordion style={{ width: "70%" }}>
@@ -275,7 +297,8 @@ class Details extends Component {
                         addReview: false,
                         newReview: {
                             comment: "",
-                            rate: null
+                            rate: null,
+                            productid: null
                         }
                     })}>
                         <Modal.Body>
@@ -314,92 +337,7 @@ class Details extends Component {
                             </Form>
                         </Modal.Body>
                     </Modal>
-                    <Modal
-                        show={this.state.editModal}
-                        onHide={() => this.setState({
-                            editModal: false, editProductInfo: {
-                                name: "",
-                                brand: "",
-                                description: "",
-                                imageUrl: '',
-                                price: null,
-                                category: ''
-                            }
-                        })}>
-                        <Modal.Body>
-                            <Form onSubmit={this.updateProduct}>
-                                <div className="form-group mt-5">
-                                    <label for="name">Product name</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="name"
-                                        placeholder="Input here the Product name"
-                                        onChange={this.editInfo}
-                                        value={this.state.editProductInfo.name}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group ">
-                                    <label for="category">Product Category</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="category"
-                                        placeholder="Input here the category name"
-                                        onChange={this.editInfo}
-                                        value={this.state.editProductInfo.category}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label for="description">Product description</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="description"
-                                        placeholder="Input here the Product description"
-                                        onChange={this.editInfo}
-                                        value={this.state.editProductInfo.description}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label for="price">Product brand</label>
-                                    <input
-                                        type="text"
-                                        className="form-control"
-                                        id="brand"
-                                        placeholder="Input here the Product brand"
-                                        onChange={this.editInfo}
-                                        value={this.state.editProductInfo.brand}
-                                        required
-                                    />
-                                </div>
-                                <div className="form-group">
-                                    <label for="price">Product price</label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        id="price"
-                                        placeholder="Input here the Product price"
-                                        onChange={this.editInfo}
-                                        value={this.state.editProductInfo.price}
-                                        required
-                                    />
-                                </div>
-                                <div>
-                                    <input type="file" name="file" onChange={this.saveImg} />
-                                </div>
-                                <div className="form-group">
-                                    <Button className="btn btn-primary mt-4" type="submit">
-                                        Update Product Info
-                                </Button>
-                                </div>
-                            </Form>
-
-                        </Modal.Body>
-                    </Modal>
+                    
                 </Container>
             </div>
         );
