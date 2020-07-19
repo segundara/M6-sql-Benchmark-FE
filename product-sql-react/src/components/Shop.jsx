@@ -48,22 +48,6 @@ class MyShop extends React.Component {
     .then((responseObject) =>{
         this.setState({numOfProduct: responseObject.count})
         
-        // if(responseObject.length > 0){
-        //     let keys = Object.keys(responseObject.data[0]);
-            
-        //     keys.shift()
-        //     keys.shift()
-        //     keys.pop()
-        //     keys.pop()
-        //     keys.pop()
-        //     const keyArr = []
-
-        //     for (let i = 0; i < keys.length; i++) {
-        //         let key = keys[i];
-        //         keyArr.push(key)
-        //     }        
-        //     this.setState({sortingKeys: keyArr})
-        // }
     })
     }
   }
@@ -97,13 +81,10 @@ class MyShop extends React.Component {
             });
             }
         }
-        else {d_cat = this.props.displayCategory//}
+        else {d_cat = this.props.displayCategory
 
         this.getNumberOfProduct()
         
-        //const sortParam = this.state.selectedKey
-    
-        //const skip = (this.state.currentPageNum * this.state.numPerPage)-this.state.numPerPage
         const url = `http://localhost:3234/products?category=${d_cat}&limit=${this.state.numPerPage}&offset=${skip}`
         //const url = `http://localhost:3234/products`
 
@@ -135,30 +116,26 @@ class MyShop extends React.Component {
     }
 
     addToCart = async (productId) => {
-        const url = `http://localhost:3234/customers?name=Bee`
-        const user = await fetch(url)
-        if(user.ok){
-            const userJSON = await user.json()
-            console.log(userJSON.data[0]._id)
-            const url = `http://localhost:3234/customers/${userJSON.data[0]._id}/add-to-cart/${productId}`
-            const addProduct = await fetch(url, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
-            if(addProduct.ok){
-                this.setState({customerId: userJSON.data[0]._id})
-                // console.log('added')
+        const userid = 1
+        const url = `http://localhost:3234/cart`
+        const addProduct = await fetch(url, {
+            method: "POST",
+            body: JSON.stringify({productid: productId, userid: userid}),
+            headers: {
+                "Content-Type": "application/json"
             }
+        })
+        if(addProduct.ok){
+            alert('added to cart!')
+            this.props.sendCartUpdate(productId, userid)
         }
     }
 
     
       render() {
-          console.log(this.props.displayCategory)
-          console.log(this.state.numOfProduct)
-          console.log(this.state.products)
+        //   console.log(this.props.displayCategory)
+        //   console.log(this.state.numOfProduct)
+        //   console.log(this.state.products)
           const pageNumbers = [];
           for (let i = 1; i <= Math.ceil(this.state.numOfProduct / this.state.numPerPage); i++) {
               pageNumbers.push(i);
