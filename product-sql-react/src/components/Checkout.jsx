@@ -45,6 +45,7 @@ class Checkout extends React.Component {
                                     <th>{item.unitary_price}</th>
                                     <th>{item.quantity}</th>
                                     <th>{item.total}</th>
+                                    <th><Button variant="danger" onClick={() => this.removeFromCart(item._id)}>Remove from Cart</Button></th>
                                 </tr>
                             )
                             )}
@@ -58,7 +59,10 @@ class Checkout extends React.Component {
                     </tbody>
                 </Table>
                 <Alert variant="info">Total purchase is €{this.state.cartTotal}</Alert>
-                <Button variant="success" onClick={() => this.makePayment()}>Make Payment</Button>
+                <div className="d-flex justify-content-between">
+                <Button variant="info" onClick={() => this.props.history.push('/')}>Continue shopping</Button>
+                <Button variant="success" onClick={() => this.makePayment()}>Checkout</Button>
+                </div>
             </div>
             </Container>
         )
