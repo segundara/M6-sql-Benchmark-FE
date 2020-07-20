@@ -126,7 +126,7 @@ class MyShop extends React.Component {
             }
         })
         if(addProduct.ok){
-            alert('added to cart!')
+            // alert('added to cart!')
             this.props.sendCartUpdate(productId, userid)
         }
     }
@@ -165,9 +165,9 @@ class MyShop extends React.Component {
                                 <Button 
                                     variant="secondary" 
                                     onClick={() => (
-                                        this.addToCart(product._id),
-                                        this.setState({updateCartInNavbar: this.state.updateCartInNavbar + 1}),
-                                        this.props.updateCart(this.state.updateCartInNavbar + 1)
+                                        this.addToCart(product._id)
+                                        // this.setState({updateCartInNavbar: this.state.updateCartInNavbar + 1}),
+                                        // this.props.updateCart(this.state.updateCartInNavbar + 1)
                                         )}>
                                         add to cart
                                     <FontAwesomeIcon icon={faCartPlus}/>

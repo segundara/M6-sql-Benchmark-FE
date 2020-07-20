@@ -17,9 +17,9 @@ class Homepage extends React.Component {
         this.setState({category})
       };
 
-    incrementCart = (count) => {
-        this.props.addToCart(count)
-    }
+    // incrementCart = (count) => {
+    //     this.props.addToCart(count)
+    // }
 
     updateCart = (productid, userid) => {
         //this.setState({productid,userid})
@@ -40,7 +40,7 @@ class Homepage extends React.Component {
                         <Col xs={10} id="page-content-wrapper">
                           <MyShop 
                             displayCategory={this.state.category} 
-                            updateCart={this.incrementCart} 
+                            // updateCart={this.incrementCart} 
                             sendCartUpdate={this.updateCart}
                           />
                         </Col> 
