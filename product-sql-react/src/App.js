@@ -12,27 +12,33 @@ import Backoffice from './components/Backoffice';
 
 class App extends React.Component {
   state = {
-    count: 0
+    count: 0,
+    productidArray: []
   }
 
-  addProductToCart = (count) => {
-    this.setState({count})
-  }
+  // addProductToCart = (count) => {
+  //   this.setState({count})
+  // }
   
   addToCart = async(productid, userid) => {
-        const url = `http://localhost:3234/cart/${userid}`
-        const resp = await fetch(url)
-        if(resp.ok){
-          console.log(resp.json())
-        }
+    if(!this.state.productidArray.includes(productid)){
+      const idArray = [...this.state.productidArray, productid]
+      this.setState({productidArray: idArray,
+        count: this.state.count+1
+      })
+    }
+    else{
+      this.setState({count: this.state.count})
+    }
   }
 
 
   render(){
+    console.log(this.state.productidArray)
     return (
         <Router>
           <Navbar updateProductInCart={this.state.count} />
-          <Route path="/" exact render={(props) => <Homepage {...props} addToCart={this.addProductToCart} updateCartInfo={this.addToCart} />} />
+          <Route path="/" exact render={(props) => <Homepage {...props} updateCartInfo={this.addToCart} />} />
           <Route path="/productDetails/:id" component={Details} />
           <Route path="/checkout" component={Checkout} />
           <Route path="/backoffice" component={Backoffice} />
