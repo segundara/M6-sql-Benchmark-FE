@@ -51,7 +51,7 @@ class Backoffice extends Component {
   }
 
   getNumberOfProduct = async () => {
-    const totalProducts = `http://localhost:3234/products`   
+    const totalProducts = `${process.env.REACT_APP_API_URL}/products`   
     await fetch(totalProducts)
     .then((response) => response.json())
     
@@ -87,7 +87,7 @@ class Backoffice extends Component {
     let sortParam
     if(this.state.selectedKey === '...'){
         const skip = (this.state.currentPageNum * this.state.numPerPage)-this.state.numPerPage
-        const url = `http://localhost:3234/products?limit=${this.state.numPerPage}&offset=${skip}`
+        const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}`
             
         await fetch(url)
         .then((response) => response.json())
@@ -101,7 +101,7 @@ class Backoffice extends Component {
         sortParam = this.state.selectedKey        
 
         const skip = (this.state.currentPageNum * this.state.numPerPage)-this.state.numPerPage
-        const url = `http://localhost:3234/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${sortParam}&order=${this.state.orderKey}`
+        const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${sortParam}&order=${this.state.orderKey}`
             
         await fetch(url)
         .then((response) => response.json())
@@ -119,7 +119,7 @@ class Backoffice extends Component {
   
   sortedList = async (sortByKey) => {
     const skip = (this.state.currentPageNum * this.state.numPerPage)-this.state.numPerPage
-    const url = `http://localhost:3234/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${sortByKey}&order=${this.state.orderKey}`
+    const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${sortByKey}&order=${this.state.orderKey}`
         
     await fetch(url)
     .then((response) => response.json())
@@ -130,7 +130,7 @@ class Backoffice extends Component {
   
   orderedList = async (orderByKey) => {
     const skip = (this.state.currentPageNum * this.state.numPerPage)-this.state.numPerPage
-    const url = `http://localhost:3234/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${this.state.selectedKey}&order=${orderByKey}`
+    const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${this.state.selectedKey}&order=${orderByKey}`
         
     await fetch(url)
     .then((response) => response.json())
@@ -162,7 +162,7 @@ updateProductInfo = async (e) => {
   const data = new FormData()
   data.append("product", this.state.photo)
 
-  const resp = await fetch("http://localhost:3234/products/" + this.state.productid, {
+  const resp = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.state.productid, {
       method: "PUT",
       body: JSON.stringify(this.state.editProductInfo),
       headers: {
@@ -170,7 +170,7 @@ updateProductInfo = async (e) => {
       }
   })
 
-  let addPhoto = await fetch("http://127.0.0.1:3234/products/" + this.state.productid + "/upload", {
+  let addPhoto = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.state.productid + "/upload", {
       method: "POST",
       body: data
   })
@@ -185,7 +185,7 @@ updateProductInfo = async (e) => {
 }
   
   editInfo = async (productid) => {
-    const resp = await fetch("http://localhost:3234/products/" + productid)
+    const resp = await fetch(`${process.env.REACT_APP_API_URL}/products/` + productid)
 
     if (resp.ok) {
         const product = await resp.json()        
@@ -228,7 +228,7 @@ getProductInfo = event => {
       
     e.preventDefault();
 
-    const url = `http://localhost:3234/products`
+    const url = `${process.env.REACT_APP_API_URL}/products`
 
     try {
       let response = await fetch(url , {
@@ -263,7 +263,7 @@ getProductInfo = event => {
   }
 
   deleteInfo = async (productid) => {
-    const resp = await fetch("http://localhost:3234/products/" + productid, {
+    const resp = await fetch(`${process.env.REACT_APP_API_URL}/products/` + productid, {
         method: "DELETE"
     })
 
