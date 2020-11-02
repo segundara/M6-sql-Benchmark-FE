@@ -59,15 +59,16 @@ class Backoffice extends Component {
         console.log(responseObject)
         this.setState({totalProducts: responseObject.count})
         
-        let keys = Object.keys(responseObject.data[0]);
-        const keyArr = []
-
-        for (let i = 0; i < keys.length; i++) {
-            let key = keys[i];
-            if((key === 'name')||(key === 'brand')||(key === 'description')||(key === 'category')||(key === 'price'))
-                keyArr.push(key)
-        }        
-        this.setState({sortingKeys: keyArr})
+        if(responseObject.data.length>0){
+            let keys = Object.keys(responseObject.data[0]);
+            const keyArr = []
+                for (let i = 0; i < keys.length; i++) {
+                    let key = keys[i];
+                    if((key === 'name')||(key === 'brand')||(key === 'description')||(key === 'category')||(key === 'price'))
+                        keyArr.push(key)
+                }        
+                this.setState({sortingKeys: keyArr})
+        }
     })
      
   }
