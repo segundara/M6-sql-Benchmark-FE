@@ -3,6 +3,7 @@ import {Navbar, Nav, Badge} from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
+import "./Style.css"
 
 class NavBar extends React.Component {
     state={
@@ -12,22 +13,13 @@ class NavBar extends React.Component {
     render() {
 
         return (
-            <Navbar collapseOnSelect expand="lg" variant="light" bg="light" className="shadow-lg border border-success">
+            <Navbar collapseOnSelect expand="lg">
                 <Link to='/'>
                     <Navbar.Brand>Strive-Mazon</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
                 <Navbar.Collapse id="responsive-navbar-nav">
                     <Nav className="mr-auto">
-                        <Link to="/"
-                            className={
-                                this.props.location.pathname === '/'
-                                ? "nav-link active"
-                                : "nav-link"
-                            }
-                            >
-                            Home
-                        </Link>
                         <Link to="/backoffice"
                             className={
                                 this.props.location.pathname === '/backoffice'
@@ -38,9 +30,7 @@ class NavBar extends React.Component {
                             Backoffice
                         </Link>
                     </Nav>
-                    {/* <Nav>
-                        <Nav.Link href="#">Search</Nav.Link>
-                    </Nav> */}
+                    
                     {this.props.location.pathname === '/backoffice'
                     ?null
                     :   (
