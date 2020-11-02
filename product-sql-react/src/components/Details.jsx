@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, useContext } from 'react';
 import {
     Container,
     Row,
@@ -13,8 +13,44 @@ import {
     Card,
     Badge
 } from 'react-bootstrap'
-import { Link } from 'react-router-dom'
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
+import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
+import AccordionContext from "react-bootstrap/AccordionContext";
 
+
+function CustomToggle({ children, eventKey, callback }) {
+    const currentEventKey = useContext(AccordionContext);
+
+    const decoratedOnClick = useAccordionToggle(
+      eventKey,
+      () => callback && callback(eventKey)
+    );
+
+    const isCurrentEventKey = currentEventKey === eventKey;
+
+    return (
+      <div
+        onClick={decoratedOnClick}
+        style={{
+          cursor: "pointer",
+          display: "flex",
+          justifyContent: "space-between",
+          color: "#fff",
+          fontSize: "1rem",
+          fontWeight: "900",
+          padding: "0.5rem 1rem",
+          fontFamily: "sans-serif",
+        }}
+      >
+        {children}
+        <FontAwesomeIcon
+          style={{ height: "auto" }}
+          icon={isCurrentEventKey ? faAngleUp : faAngleDown}
+        />
+      </div>
+    );
+  }
 class Details extends Component {
 
     state = {
@@ -26,29 +62,9 @@ class Details extends Component {
             comment: "",
             rate: 1
         },
-        // editProductInfo: {
-        //     name: "",
-        //     brand: "",
-        //     description: "",
-        //     imageUrl: '',
-        //     price: null,
-        //     category: ''
-        // },
         reviews: [],
         photo: ''
     }
-
-
-    // editInfo = (event) => {
-    //     const editProductInfo = this.state.editProductInfo
-
-    //     if (event.currentTarget.id === "price") {
-    //         editProductInfo[event.currentTarget.id] = parseInt(event.currentTarget.value)
-    //     } else {
-    //         editProductInfo[event.currentTarget.id] = event.currentTarget.value
-    //     }
-    //     this.setState({ editProductInfo })
-    // }
 
     handleChange = (e) => {
         const newReview = this.state.newReview
@@ -65,14 +81,14 @@ class Details extends Component {
     }
 
     fetchDetails = async () => {
-        const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
+        const resp = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.props.match.params.id)
         if (resp.ok) {
             const details = await resp.json()
             this.setState({
                 product: details.data
             });
         }
-        const response = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id + "/reviews")
+        const response = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.props.match.params.id + "/reviews")
         if (response.ok) {
             const details = await response.json()
             this.setState({
@@ -86,7 +102,7 @@ class Details extends Component {
         
         const reviewBody = ({...this.state.newReview, "productid": this.props.match.params.id})
         
-        const resp = await fetch("http://127.0.0.1:3234/reviews", {
+        const resp = await fetch(`${process.env.REACT_APP_API_URL}/reviews`, {
             method: "POST",
             body: JSON.stringify(reviewBody),
             headers: {
@@ -104,121 +120,22 @@ class Details extends Component {
             });
             
             this.fetchDetails()
-            // const res = await fetch("http://127.0.0.1:3234/reviews")
-            // if (res.ok) {
-            //     const reviews = await res.json()
-            //     const newRev = reviews.pop()
-            //     console.log(newRev)
-            //     console.log(newRev._id)
-                
-            //     const proRev = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
-            //     if (proRev.ok) {
-            //         const product = await proRev.json()
-            //         const revArr = product.product.reviews
-            //         revArr.push(newRev)
-            //         console.log(revArr)
-            //         const allReviews = revArr.map(review => review._id)
-            //         console.log(allReviews)
-
-            //         const updateReviews = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
-            //             method: "PUT",
-            //             body: JSON.stringify({reviews: allReviews}),
-            //             headers: {
-            //                 "Content-Type": "application/json"
-            //             }
-            //         })
-            //         if(updateReviews.ok){
-            //             this.setState({
-            //                 addReview: false,
-            //                 newReview: {
-            //                     comment: "",
-            //                     rate: null
-            //                 },
-            //             });
-                        
-            //             this.fetchDetails()
-            //         }else console.log('noooooo');
-                    
-            //     }
-            // }
         }
     }
-
-    // editProduct = async () => {
-    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id)
-
-    //     if (resp.ok) {
-    //         const product = await resp.json()
-    //         this.setState({
-    //             editProductInfo: {
-    //                 name: product.product.name,
-    //                 brand: product.product.brand,
-    //                 description: product.product.description,
-    //                 imageUrl: product.product.imageUrl,
-    //                 price: parseInt(product.product.price),
-    //                 category: product.product.category
-    //             },
-    //             editModal: true
-    //         });
-    //     }
-    // }
-
-    // deleteProduct = async () => {
-    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
-    //         method: "DELETE"
-    //     })
-    //     if (resp.ok) {
-    //         this.props.history.push("/")
-    //     }
-    // }
 
     componentDidMount() {
         this.fetchDetails()
     }
 
-    // saveImg = (e) => {
-    //     this.setState({
-    //         photo: e.target.files[0]
-    //     });
-    // }
-
     deleteReview = async (id) => {
-        const resp = await fetch("http://127.0.0.1:3234/reviews/" + id, {
+        const resp = await fetch(`${process.env.REACT_APP_API_URL}/reviews/` + id, {
             method: "DELETE"
         })
 
         this.fetchDetails()
 
     }
-
-    // updateProduct = async (e) => {
-    //     e.preventDefault()
-    //     const data = new FormData()
-    //     data.append("product", this.state.photo)
-
-    //     const resp = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id, {
-    //         method: "PUT",
-    //         body: JSON.stringify(this.state.editProductInfo),
-    //         headers: {
-    //             "Content-Type": "application/json"
-    //         }
-    //     })
-
-    //     let addPhoto = await fetch("http://127.0.0.1:3234/products/" + this.props.match.params.id + "/upload", {
-    //         method: "POST",
-    //         body: data
-    //     })
-
-    //     if (resp.ok) {
-    //         this.setState({
-    //             editModal: false
-    //         });
-    //         this.fetchDetails()
-    //     }
-
-    // }
-
-
+    
 
     render() {
         console.log(this.state.reviews)
@@ -229,42 +146,33 @@ class Details extends Component {
                     <Row>
                         {this.state.product &&(
                             <>
-                                <Col md={6} className="mt-5">
+                                <Col md={3} className="mt-5">
                                     <Image src={this.state.product.image_url} style={{ height: "50vh", width: "25rem" }} />
                                 </Col>
-                                <Col md={6} className="mt-5 text-center">
-                                    <div>
-                                        <h3>{this.state.product.name}</h3>
-                                        <h5 className="mt-5">Description</h5>
-                                        <p>{this.state.product.description}</p>
-                                        <h5>Brand</h5>
-                                        <p>{this.state.product.brand}</p>
-                                        <h5>Price</h5>
-                                        <p>${this.state.product.price}</p>
+                                <Col md={7} className="mt-5 detail">
+                                    <div className="w-50">
+                                        <p><h3>{this.state.product.name}</h3></p>
+                                        <p>
+                                            <span><strong>Description:</strong></span>
+                                            <span> {this.state.product.description}</span>
+                                        </p>
+                                        <p>
+                                            <span><strong>Brand:</strong></span>
+                                            <span> {this.state.product.brand}</span>
+                                        </p>
                                     </div>
-                                    <div className="mb-3">
-                                        <Button onClick={() => this.setState({ addReview: true })}>Add review</Button>
+                                    <div className="d-flex justify-content-between w-50">
+                                        <Badge variant="info" style={{lineHeight: '2rem', fontSize: 'large'}}>€{this.state.product.price}</Badge>
+                                        <Button variant="secondary" onClick={() => this.setState({ addReview: true })}>Add review</Button>
                                     </div>
-                                    {/* <div className="d-flex justify-content-center">
-                                        <Button
-                                            variant="danger"
-                                            className="mr-3"
-                                            onClick={() => this.deleteProduct()}
-                                        >Delete</Button>
-                                        <Button
-                                            variant="warning"
-                                            onClick={() => this.editProduct()}
-                                        >Edit</Button>
-                                    </div> */}
-                                    <div className="d-flex justify-content-center mt-4">
+
+                                    <div className="d-flex justify-content-center mt-4 w-75">
                                         {this.state.reviews.length > 0 ?
                                             <Accordion style={{ width: "70%" }}>
-                                                <Card>
-                                                    <Card.Header>
-                                                        <Accordion.Toggle as={Button} variant="link" eventKey="1">
+                                                <Card className="accordion-card">
+                                                        <CustomToggle as={Card.Header} eventKey="1">
                                                             See customers' reviews!
-                                                </Accordion.Toggle>
-                                                    </Card.Header>
+                                                        </CustomToggle>
                                                     <Accordion.Collapse eventKey="1">
                                                         <>
                                                             {this.state.reviews.map(review =>
@@ -275,10 +183,10 @@ class Details extends Component {
                                                                         variant="danger"
                                                                         onClick={() => this.deleteReview(review._id)}
                                                                     >Delete</Button>
-                                                                    <Button
+                                                                    {/* <Button
                                                                         className="ml-3"
                                                                         variant="warning"
-                                                                    >Edit</Button>
+                                                                    >Edit</Button> */}
                                                                 </Card.Body>
                                                             )}
                                                         </>
