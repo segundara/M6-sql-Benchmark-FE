@@ -228,16 +228,6 @@ getProductInfo = event => {
   addNewproduct = async (e) => {
       
     e.preventDefault();
-    if(this.state.photo.length>0){
-        const data = new FormData()
-        data.append("product", this.state.photo)
-      
-        let addPhoto = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.state.productid + "/upload", {
-            method: "POST",
-            body: data
-        })
-
-    }
 
     const url = `${process.env.REACT_APP_API_URL}/products`
 
@@ -551,9 +541,9 @@ getProductInfo = event => {
                                 required
                             />
                         </div>
-                        <div>
+                        {/* <div>
                             <input type="file" name="file" onChange={this.saveImg} />
-                        </div>
+                        </div> */}
                         <div className="form-group">
                             <Button className="btn btn-primary mt-4" type="submit">
                                 Save Product Info
