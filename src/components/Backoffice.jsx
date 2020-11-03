@@ -284,7 +284,7 @@ getProductInfo = event => {
     return (
 
         <div>
-          <Container>
+          <Container className="pt-3">
             <Button variant="info" onClick={() => this.setState({addModal: true})}>Add new product</Button>
             <DropdownButton
                 as={ButtonGroup}
@@ -354,7 +354,7 @@ getProductInfo = event => {
                 :null}
             </div>
 
-            <Table striped bordered hover size="sm">
+            <Table striped bordered hover size="sm" responsive="sm">
                 <thead>
                     <tr>
                     <th>#</th>
