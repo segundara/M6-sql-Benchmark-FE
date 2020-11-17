@@ -39,7 +39,7 @@ class App extends React.Component {
       <Router>
         <Navbar updateProductInCart={this.state.count} />
         <Route
-          path="/M6-sql-Benchmark-FE"
+          path={process.env.REACT_APP_HOMEPAGE}
           exact
           render={(props) => (
             <Products {...props} sendCartUpdate={this.addToCart} />

@@ -29,7 +29,7 @@
     <a href="https://github.com/segundara/M6-sql-Benchmark-FE"><strong>Explore the repo »</strong></a>
     <br />
     <br />
-    <a href="https://strive-mazon-fe.herokuapp.com/">View Demo</a>
+    <a href="https://segundara.github.io/M6-sql-Benchmark-FE">View Demo</a>
     ·
     <a href="https://github.com/segundara/M6-sql-Benchmark-FE/issues">Report Bug</a>
   </p>

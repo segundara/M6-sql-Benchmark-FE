@@ -14,7 +14,7 @@ class NavBar extends React.Component {
 
         return (
             <Navbar collapseOnSelect expand="lg">
-                <Link to='/M6-sql-Benchmark-FE'>
+                <Link to={process.env.REACT_APP_HOMEPAGE}>
                     <Navbar.Brand>Strive-Mazon</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />

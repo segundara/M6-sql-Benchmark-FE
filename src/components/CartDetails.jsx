@@ -76,7 +76,7 @@ class CartDetails extends React.Component {
             </tbody>
           </Table>
           <div className="d-flex justify-content-between">
-            <Button variant="info" onClick={() => this.props.history.push("/")}>
+            <Button variant="info" onClick={() => this.props.history.push(`${process.env.REACT_APP_HOMEPAGE}`)}>
               Continue shopping
             </Button>
             <Button variant="success" onClick={() => this.makePayment()}>
