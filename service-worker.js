@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/M6-sql-Benchmark-FE/precache-manifest.637070ff4da8f9bb840ada82ef9b2ea0.js"
+  "/M6-sql-Benchmark-FE/precache-manifest.c0ca0b4c2d124870cbf4aba7e1e41175.js"
 );
 
 self.addEventListener('message', (event) => {
