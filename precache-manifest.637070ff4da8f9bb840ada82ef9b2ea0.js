@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "de5b62565f7d57fa8a214337bf1eddec",
+    "revision": "179973a17a676ff2d3fac5202cf5fe8f",
     "url": "/M6-sql-Benchmark-FE/index.html"
   },
   {
