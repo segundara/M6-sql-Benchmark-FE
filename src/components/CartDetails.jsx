@@ -14,7 +14,18 @@ class CartDetails extends React.Component {
     this.props.history.push("/payments")
   };
 
-  componentDidMount = async () => {
+  removeFromCart = (productID) => {
+    const url = `${process.env.REACT_APP_API_URL}/cart/1/${productID}`;
+    const resp = await fetch(url, {
+      method: "DELETE",
+    });
+    if (resp.ok) {
+      this.showCartDetails()
+    }
+
+  }
+
+  showCartDetails = () => {
     const url = `${process.env.REACT_APP_API_URL}/cart/1`;
     const resp = await fetch(url);
     if (resp.ok) {
@@ -31,6 +42,10 @@ class CartDetails extends React.Component {
         console.log(totalArray);
       }
     }
+  }
+
+  componentDidMount = async () => {
+    this.showCartDetails()
   };
 
   render() {
