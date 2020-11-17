@@ -28,7 +28,7 @@ class App extends React.Component {
   emptyCart = (value) => {
     this.setState({ count: value });
   };
-  
+
   setPayment = (value) => {
     this.setState({ paymentTotal: value });
   };
@@ -39,14 +39,14 @@ class App extends React.Component {
       <Router>
         <Navbar updateProductInCart={this.state.count} />
         <Route
-          path="/"
+          path="/M6-sql-Benchmark-FE"
           exact
           render={(props) => (
             <Products {...props} sendCartUpdate={this.addToCart} />
           )}
         />
         <Route path="/productDetails/:id" component={Details} />
-        <Route path="/payments" 
+        <Route path="/payments"
           render={(props) => <Stripe {...props} paymentTotal={this.state.paymentTotal} emptyCart={this.emptyCart} />} />
         <Route
           path="/checkout"

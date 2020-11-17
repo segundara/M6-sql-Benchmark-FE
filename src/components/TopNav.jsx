@@ -1,20 +1,20 @@
 import React from 'react';
-import {Navbar, Nav, Badge} from 'react-bootstrap';
+import { Navbar, Nav, Badge } from 'react-bootstrap';
 import { Link, withRouter } from 'react-router-dom';
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons";
 import "./Style.css"
 
 class NavBar extends React.Component {
-    state={
-        
+    state = {
+
     }
 
     render() {
 
         return (
             <Navbar collapseOnSelect expand="lg">
-                <Link to='/'>
+                <Link to='/M6-sql-Benchmark-FE'>
                     <Navbar.Brand>Strive-Mazon</Navbar.Brand>
                 </Link>
                 <Navbar.Toggle aria-controls="responsive-navbar-nav" />
@@ -23,20 +23,20 @@ class NavBar extends React.Component {
                         <Link to="/backoffice"
                             className={
                                 this.props.location.pathname === '/backoffice'
-                                ? "nav-link active"
-                                : "nav-link"
+                                    ? "nav-link active"
+                                    : "nav-link"
                             }
-                            >
+                        >
                             Backoffice
                         </Link>
                     </Nav>
-                    
+
                     {this.props.location.pathname === '/backoffice'
-                    ?null
-                    :   (
+                        ? null
+                        : (
                             <>
-                                <FontAwesomeIcon icon={faCartPlus} className="mt-4" onClick={()=>this.props.history.push("/checkout")}/>
-                                <Badge variant="info">{this.props.updateProductInCart ?this.props.updateProductInCart :0}</Badge>
+                                <FontAwesomeIcon icon={faCartPlus} className="mt-4" onClick={() => this.props.history.push("/checkout")} />
+                                <Badge variant="info">{this.props.updateProductInCart ? this.props.updateProductInCart : 0}</Badge>
                             </>
                         )
                     }
