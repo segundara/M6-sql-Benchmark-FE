@@ -178,6 +178,7 @@ class Products extends React.Component {
               <rect x="5" y="45" rx="4" ry="4" width="220" height="35" />
               <rect x="5" y="85" rx="4" ry="4" width="220" height="35" />
               <rect x="5" y="125" rx="4" ry="4" width="220" height="35" />
+              <rect x="5" y="165" rx="4" ry="4" width="220" height="35" />
               <rect x="250" y="43" rx="0" ry="0" width="280" height="300" />
               <rect x="550" y="43" rx="0" ry="0" width="280" height="300" />
               <rect x="850" y="43" rx="0" ry="0" width="280" height="300" />
