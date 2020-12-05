@@ -174,162 +174,156 @@ class Products extends React.Component {
       <>
         <Container fluid>
           {this.state.loading && (
-            <div
-            >
-              <ContentLoader style={{ width: '100%', height: '100vh' }} viewBox="0 0 1500 800" height={800} width={1500} {...this.props}>
-                <rect x="5" y="45" rx="4" ry="4" width="220" height="30" />
-                <rect x="5" y="80" rx="4" ry="4" width="220" height="30" />
-                <rect x="5" y="115" rx="4" ry="4" width="220" height="30" />
-                <rect x="250" y="43" rx="0" ry="0" width="280" height="300" />
-                <rect x="550" y="43" rx="0" ry="0" width="280" height="300" />
-                <rect x="850" y="43" rx="0" ry="0" width="280" height="300" />
-                <rect x="1150" y="43" rx="0" ry="0" width="280" height="300" />
-                <rect x="250" y="400" rx="2" ry="2" width="280" height="300" />
-                <rect x="550" y="400" rx="2" ry="2" width="280" height="300" />
-                <rect x="850" y="400" rx="2" ry="2" width="280" height="300" />
-                <rect x="1150" y="400" rx="2" ry="2" width="280" height="300" />
-              </ContentLoader>
-            </div>
+            <ContentLoader style={{ width: '100%', height: '100vh' }} viewBox="0 0 1500 800" height={800} width={1500} {...this.props}>
+              <rect x="5" y="45" rx="4" ry="4" width="220" height="35" />
+              <rect x="5" y="85" rx="4" ry="4" width="220" height="35" />
+              <rect x="5" y="125" rx="4" ry="4" width="220" height="35" />
+              <rect x="250" y="43" rx="0" ry="0" width="280" height="300" />
+              <rect x="550" y="43" rx="0" ry="0" width="280" height="300" />
+              <rect x="850" y="43" rx="0" ry="0" width="280" height="300" />
+              <rect x="1150" y="43" rx="0" ry="0" width="280" height="300" />
+              <rect x="250" y="400" rx="2" ry="2" width="280" height="300" />
+              <rect x="550" y="400" rx="2" ry="2" width="280" height="300" />
+              <rect x="850" y="400" rx="2" ry="2" width="280" height="300" />
+              <rect x="1150" y="400" rx="2" ry="2" width="280" height="300" />
+            </ContentLoader>
           )}
           {this.state.products && this.state.products.length > 0 && (
-            <Row className="pt-5">
-              <Col>
-                <Tab.Container
-                  id="left-tabs-example"
-                  defaultActiveKey="0"
-                  onSelect={() => this.changePage(1)}
-                >
-                  <Row>
-                    <Col sm={2}>
-                      <Nav variant="pills" className="flex-column">
-                        {this.state.products.map((list, i) => {
-                          return (
-                            <Nav.Item key={i}>
-                              <Nav.Link
-                                eventKey={i}
-                                className="d-flex justify-content-between"
-                              >
-                                <small>
-                                  <b>{list.category}</b>
-                                </small>
-                                <Badge variant="light">
-                                  <span>{this.state.numOfProduct[i]}</span>
-                                </Badge>
-                              </Nav.Link>
-                            </Nav.Item>
-                          );
-                        })}
-                      </Nav>
-                    </Col>
-                    <Col sm={10}>
-                      <Tab.Content>
-                        {this.state.products.map((list, i) => {
-                          return (
-                            <Tab.Pane key={i} eventKey={i}>
-                              {//!this.state.loading &&
-                                list.items.length > 0 &&
-                                this.state.pageNumbers &&
-                                this.state.pageNumbers.length > 0 && (
-                                  <>
-                                    <div className="d-flex flex-wrap">
-                                      {list.items.map((product) => (
-                                        <Card
-                                          key={product._id}
-                                          style={{ width: "18vw" }}
-                                          className="productCard"
-                                        >
-                                          <Card.Img
-                                            variant="top"
-                                            src={product.image_url}
-                                            height="35%"
-                                          />
-                                          <Card.Body>
-                                            <Card.Title>
-                                              {product.name}
-                                            </Card.Title>
-                                            {/* <div className="d-flex justify-content-between"> */}
-                                            <label>
-                                              Brand: {product.brand}
-                                            </label>
-                                            <h4> €{product.price}</h4>
-                                            {/* </div> */}
-                                            <div className="d-flex justify-content-between">
-                                              <Button
-                                                variant="info"
-                                                onClick={() =>
-                                                  this.linkToDetails(
+            <div className="inStore">
+              <Tab.Container
+                id="left-tabs-example"
+                defaultActiveKey="0"
+                onSelect={() => this.changePage(1)}
+              >
+                <Row>
+                  <Col md={2}>
+                    <Nav variant="pills" className="flex-column">
+                      {this.state.products.map((list, i) => {
+                        return (
+                          <Nav.Item key={i}>
+                            <Nav.Link
+                              eventKey={i}
+                              className="d-flex justify-content-between"
+                            >
+                              <small>
+                                <b>{list.category}</b>
+                              </small>
+                              <Badge variant="light">
+                                <span>{this.state.numOfProduct[i]}</span>
+                              </Badge>
+                            </Nav.Link>
+                          </Nav.Item>
+                        );
+                      })}
+                    </Nav>
+                  </Col>
+                  <Col md={10}>
+                    <Tab.Content>
+                      {this.state.products.map((list, i) => {
+                        return (
+                          <Tab.Pane key={i} eventKey={i}>
+                            {//!this.state.loading &&
+                              list.items.length > 0 &&
+                              this.state.pageNumbers &&
+                              this.state.pageNumbers.length > 0 && (
+                                <>
+                                  <div className="d-flex flex-wrap">
+                                    {list.items.map((product) => (
+                                      <Card
+                                        key={product._id}
+                                        className="productCard"
+                                      >
+                                        <Card.Img
+                                          variant="top"
+                                          src={product.image_url}
+                                          height="35%"
+                                        />
+                                        <Card.Body>
+                                          <Card.Title>
+                                            {product.name}
+                                          </Card.Title>
+                                          {/* <div className="d-flex justify-content-between"> */}
+                                          <label>
+                                            Brand: {product.brand}
+                                          </label>
+                                          <h4> €{product.price}</h4>
+                                          {/* </div> */}
+                                          <div className="d-flex justify-content-between">
+                                            <Button
+                                              variant="info"
+                                              onClick={() =>
+                                                this.linkToDetails(
+                                                  product._id
+                                                )
+                                              }
+                                            >
+                                              detail
+                                                </Button>
+                                            <Button
+                                              variant="secondary"
+                                              onClick={
+                                                () =>
+                                                  this.addToCart(
                                                     product._id
                                                   )
-                                                }
-                                              >
-                                                detail
-                                                </Button>
-                                              <Button
-                                                variant="secondary"
-                                                onClick={
-                                                  () =>
-                                                    this.addToCart(
-                                                      product._id
-                                                    )
-                                                }
-                                              >
-                                                add to cart
+                                              }
+                                            >
+                                              add to cart
                                                   <FontAwesomeIcon
-                                                  icon={faCartPlus}
-                                                />
-                                              </Button>
-                                            </div>
-                                          </Card.Body>
-                                        </Card>
-                                      ))}
-                                    </div>
-                                    <div className="d-flex justify-content-between">
-                                      <Pagination
-                                        threeDots
-                                        totalPages={
-                                          this.state.pageNumbers[i].length
-                                        }
-                                        currentPage={this.state.currentPageNum}
-                                        showMax={7}
-                                        prevNext
-                                        activeBgColor="#17a2b8"
-                                        color="#17a2b8"
-                                        activeBorderColor="#17a2b8"
-                                        onClick={(page) =>
-                                          this.changePage(page)
-                                        }
-                                      />
+                                                icon={faCartPlus}
+                                              />
+                                            </Button>
+                                          </div>
+                                        </Card.Body>
+                                      </Card>
+                                    ))}
+                                  </div>
+                                  <div className="d-flex justify-content-between">
+                                    <Pagination
+                                      threeDots
+                                      totalPages={
+                                        this.state.pageNumbers[i].length
+                                      }
+                                      currentPage={this.state.currentPageNum}
+                                      showMax={7}
+                                      prevNext
+                                      activeBgColor="#17a2b8"
+                                      color="#17a2b8"
+                                      activeBorderColor="#17a2b8"
+                                      onClick={(page) =>
+                                        this.changePage(page)
+                                      }
+                                    />
 
-                                      <Alert
-                                        variant="light"
-                                        className="text-right"
-                                      >
-                                        page{" "}
-                                        <strong>
-                                          {this.state.currentPageNum}
-                                        </strong>{" "}
+                                    <Alert
+                                      variant="light"
+                                      className="text-right"
+                                    >
+                                      page{" "}
+                                      <strong>
+                                        {this.state.currentPageNum}
+                                      </strong>{" "}
                                         of{" "}
-                                        <strong>
-                                          {this.state.pageNumbers[i].length}
-                                        </strong>
-                                      </Alert>
-                                    </div>
-                                  </>
-                                )}
-                              {!this.state.loading && list.items.length < 1 && (
-                                <p className="text-center">
-                                  <strong>No product in store</strong>
-                                </p>
+                                      <strong>
+                                        {this.state.pageNumbers[i].length}
+                                      </strong>
+                                    </Alert>
+                                  </div>
+                                </>
                               )}
-                            </Tab.Pane>
-                          );
-                        })}
-                      </Tab.Content>
-                    </Col>
-                  </Row>
-                </Tab.Container>
-              </Col>
-            </Row>
+                            {!this.state.loading && list.items.length < 1 && (
+                              <p className="text-center">
+                                <strong>No product in store</strong>
+                              </p>
+                            )}
+                          </Tab.Pane>
+                        );
+                      })}
+                    </Tab.Content>
+                  </Col>
+                </Row>
+              </Tab.Container>
+            </div>
           )}
 
         </Container>
