@@ -285,7 +285,7 @@ class Products extends React.Component {
                                         this.state.pageNumbers[i].length
                                       }
                                       currentPage={this.state.currentPageNum}
-                                      showMax={7}
+                                      showMax={2}
                                       prevNext
                                       activeBgColor="#17a2b8"
                                       color="#17a2b8"
