@@ -1,26 +1,26 @@
 {
   "files": {
-    "main.css": "/M6-sql-Benchmark-FE/static/css/main.0f79d55a.chunk.css",
-    "main.js": "/M6-sql-Benchmark-FE/static/js/main.e0a0b87e.chunk.js",
-    "main.js.map": "/M6-sql-Benchmark-FE/static/js/main.e0a0b87e.chunk.js.map",
+    "main.css": "/M6-sql-Benchmark-FE/static/css/main.16021e97.chunk.css",
+    "main.js": "/M6-sql-Benchmark-FE/static/js/main.9c00d68f.chunk.js",
+    "main.js.map": "/M6-sql-Benchmark-FE/static/js/main.9c00d68f.chunk.js.map",
     "runtime-main.js": "/M6-sql-Benchmark-FE/static/js/runtime-main.ae5d6baa.js",
     "runtime-main.js.map": "/M6-sql-Benchmark-FE/static/js/runtime-main.ae5d6baa.js.map",
     "static/css/2.2a86faee.chunk.css": "/M6-sql-Benchmark-FE/static/css/2.2a86faee.chunk.css",
-    "static/js/2.298cdcb3.chunk.js": "/M6-sql-Benchmark-FE/static/js/2.298cdcb3.chunk.js",
-    "static/js/2.298cdcb3.chunk.js.map": "/M6-sql-Benchmark-FE/static/js/2.298cdcb3.chunk.js.map",
+    "static/js/2.0bf7c13b.chunk.js": "/M6-sql-Benchmark-FE/static/js/2.0bf7c13b.chunk.js",
+    "static/js/2.0bf7c13b.chunk.js.map": "/M6-sql-Benchmark-FE/static/js/2.0bf7c13b.chunk.js.map",
     "index.html": "/M6-sql-Benchmark-FE/index.html",
-    "precache-manifest.be9761521c48426f27ec4cfa975002cd.js": "/M6-sql-Benchmark-FE/precache-manifest.be9761521c48426f27ec4cfa975002cd.js",
+    "precache-manifest.28c506c4a5511c53554be914f060edbc.js": "/M6-sql-Benchmark-FE/precache-manifest.28c506c4a5511c53554be914f060edbc.js",
     "service-worker.js": "/M6-sql-Benchmark-FE/service-worker.js",
     "static/css/2.2a86faee.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/2.2a86faee.chunk.css.map",
-    "static/css/main.0f79d55a.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/main.0f79d55a.chunk.css.map",
-    "static/js/2.298cdcb3.chunk.js.LICENSE.txt": "/M6-sql-Benchmark-FE/static/js/2.298cdcb3.chunk.js.LICENSE.txt",
+    "static/css/main.16021e97.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/main.16021e97.chunk.css.map",
+    "static/js/2.0bf7c13b.chunk.js.LICENSE.txt": "/M6-sql-Benchmark-FE/static/js/2.0bf7c13b.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/M6-sql-Benchmark-FE/static/media/logo.5d5d9eef.svg"
   },
   "entrypoints": [
     "static/js/runtime-main.ae5d6baa.js",
     "static/css/2.2a86faee.chunk.css",
-    "static/js/2.298cdcb3.chunk.js",
-    "static/css/main.0f79d55a.chunk.css",
-    "static/js/main.e0a0b87e.chunk.js"
+    "static/js/2.0bf7c13b.chunk.js",
+    "static/css/main.16021e97.chunk.css",
+    "static/js/main.9c00d68f.chunk.js"
   ]
 }
