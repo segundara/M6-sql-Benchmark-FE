@@ -70,15 +70,14 @@ class Backoffice extends Component {
                             keyArr.push(key)
                     }
                     this.setState({ sortingKeys: keyArr })
-                    this.getPages(responseObject.count)
                 }
+                this.getPages(responseObject.count)
             })
 
     }
 
     getPages = (total) => {
         const pages = [];
-        // const pageNumbers = [];
         for (let i = 1; i <= Math.ceil(total / this.state.numPerPage); i++) {
             pages.push(i);
         }
@@ -88,20 +87,16 @@ class Backoffice extends Component {
     };
 
     changePage = (value) => {
-        if (value > 1) {
-            this.setState({
-                currentPageNum: value
-            })
-        } else {
-            this.setState({ currentPageNum: 1 })
-        }
-        this.dataInPages()
+        this.setState({
+            currentPageNum: value
+        })
+        this.dataInPages(value)
     }
 
-    dataInPages = async () => {
+    dataInPages = async (currentPage) => {
         let sortParam
         if (this.state.selectedKey === '...') {
-            const skip = (this.state.currentPageNum * this.state.numPerPage) - this.state.numPerPage
+            const skip = (currentPage * this.state.numPerPage) - this.state.numPerPage
             const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}`
 
             await fetch(url)
@@ -116,7 +111,7 @@ class Backoffice extends Component {
         else {
             sortParam = this.state.selectedKey
 
-            const skip = (this.state.currentPageNum * this.state.numPerPage) - this.state.numPerPage
+            const skip = (currentPage * this.state.numPerPage) - this.state.numPerPage
             const url = `${process.env.REACT_APP_API_URL}/products?limit=${this.state.numPerPage}&offset=${skip}&sort=${sortParam}&order=${this.state.orderKey}`
 
             await fetch(url)
@@ -164,7 +159,7 @@ class Backoffice extends Component {
 
         this.getNumberOfProduct()
 
-        this.dataInPages()
+        this.dataInPages(this.state.currentPageNum)
     };
 
 
@@ -291,11 +286,6 @@ class Backoffice extends Component {
     }
 
     render() {
-        console.log(this.state.pageNumbers)
-        // const pageNumbers = [];
-        // for (let i = 1; i <= Math.ceil(this.state.totalProducts / this.state.numPerPage); i++) {
-        //     pageNumbers.push(i);
-        // }
 
         return (
             <Container className="pt-3">
@@ -551,9 +541,7 @@ class Backoffice extends Component {
                                             required
                                         />
                                     </div>
-                                    {/* <div>
-                            <input type="file" name="file" onChange={this.saveImg} />
-                        </div> */}
+
                                     <div className="form-group">
                                         <Button className="btn btn-primary mt-4" type="submit">
                                             Save Product Info
@@ -567,8 +555,6 @@ class Backoffice extends Component {
                 )}
 
             </Container>
-            // <div>
-            // </div>
         );
     }
 }
