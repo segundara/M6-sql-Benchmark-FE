@@ -1,4 +1,5 @@
 import React from "react";
+import ContentLoader from "react-content-loader"
 import {
   Container,
   Row,
@@ -21,7 +22,7 @@ class Products extends React.Component {
   state = {
     products: [],
     numOfProduct: [],
-    numPerPage: 6,
+    numPerPage: 8,
     currentPageNum: 1,
     loading: false,
     pageNumbers: [],
@@ -42,7 +43,7 @@ class Products extends React.Component {
         }
       }
 
-        // get total number for all category together
+      // get total number for all category together
       const url = `${process.env.REACT_APP_API_URL}/products`;
       const resp = await fetch(url);
 
@@ -102,6 +103,9 @@ class Products extends React.Component {
   };
 
   fetchProducts = async () => {
+    this.setState({
+      loading: true,
+    });
     let allCategories = [];
     const categories = await this.getCategories();
     if (categories) {
@@ -136,6 +140,7 @@ class Products extends React.Component {
       }
       this.setState({
         products: allCategories,
+        loading: false,
       });
     }
   };
@@ -168,6 +173,24 @@ class Products extends React.Component {
     return (
       <>
         <Container fluid>
+          {this.state.loading && (
+            <div
+            >
+              <ContentLoader style={{ width: '100%', height: '100vh' }} viewBox="0 0 1500 800" height={800} width={1500} {...this.props}>
+                <rect x="5" y="45" rx="4" ry="4" width="220" height="30" />
+                <rect x="5" y="80" rx="4" ry="4" width="220" height="30" />
+                <rect x="5" y="115" rx="4" ry="4" width="220" height="30" />
+                <rect x="250" y="43" rx="0" ry="0" width="280" height="300" />
+                <rect x="550" y="43" rx="0" ry="0" width="280" height="300" />
+                <rect x="850" y="43" rx="0" ry="0" width="280" height="300" />
+                <rect x="1150" y="43" rx="0" ry="0" width="280" height="300" />
+                <rect x="250" y="400" rx="2" ry="2" width="280" height="300" />
+                <rect x="550" y="400" rx="2" ry="2" width="280" height="300" />
+                <rect x="850" y="400" rx="2" ry="2" width="280" height="300" />
+                <rect x="1150" y="400" rx="2" ry="2" width="280" height="300" />
+              </ContentLoader>
+            </div>
+          )}
           {this.state.products && this.state.products.length > 0 && (
             <Row className="pt-5">
               <Col>
@@ -203,72 +226,61 @@ class Products extends React.Component {
                         {this.state.products.map((list, i) => {
                           return (
                             <Tab.Pane key={i} eventKey={i}>
-                              {this.state.loading && (
-                                <div
-                                  style={{
-                                    width: "10%",
-                                    height: "auto",
-                                    margin: "auto",
-                                  }}
-                                >
-                                  <Spinner animation="border" variant="dark" />
-                                </div>
-                              )}
-                              {!this.state.loading &&
+                              {//!this.state.loading &&
                                 list.items.length > 0 &&
                                 this.state.pageNumbers &&
                                 this.state.pageNumbers.length > 0 && (
                                   <>
                                     <div className="d-flex flex-wrap">
                                       {list.items.map((product) => (
-                                          <Card
+                                        <Card
                                           key={product._id}
-                                            style={{ width: "20rem" }}
-                                            className="productCard"
-                                          >
-                                            <Card.Img
-                                              variant="top"
-                                              src={product.image_url}
-                                              height="300px"
-                                            />
-                                            <Card.Body>
-                                              <Card.Title>
-                                                {product.name}
-                                              </Card.Title>
-                                              <div className="d-flex justify-content-between">
-                                                <label>
-                                                  Brand: {product.brand}
-                                                </label>
-                                                <h4> €{product.price}</h4>
-                                              </div>
-                                              <div className="d-flex justify-content-between">
-                                                <Button
-                                                  variant="info"
-                                                  onClick={() =>
-                                                    this.linkToDetails(
+                                          style={{ width: "18vw" }}
+                                          className="productCard"
+                                        >
+                                          <Card.Img
+                                            variant="top"
+                                            src={product.image_url}
+                                            height="35%"
+                                          />
+                                          <Card.Body>
+                                            <Card.Title>
+                                              {product.name}
+                                            </Card.Title>
+                                            {/* <div className="d-flex justify-content-between"> */}
+                                            <label>
+                                              Brand: {product.brand}
+                                            </label>
+                                            <h4> €{product.price}</h4>
+                                            {/* </div> */}
+                                            <div className="d-flex justify-content-between">
+                                              <Button
+                                                variant="info"
+                                                onClick={() =>
+                                                  this.linkToDetails(
+                                                    product._id
+                                                  )
+                                                }
+                                              >
+                                                detail
+                                                </Button>
+                                              <Button
+                                                variant="secondary"
+                                                onClick={
+                                                  () =>
+                                                    this.addToCart(
                                                       product._id
                                                     )
-                                                  }
-                                                >
-                                                  detail
-                                                </Button>
-                                                <Button
-                                                  variant="secondary"
-                                                  onClick={
-                                                    () =>
-                                                      this.addToCart(
-                                                        product._id
-                                                      )
-                                                  }
-                                                >
-                                                  add to cart
+                                                }
+                                              >
+                                                add to cart
                                                   <FontAwesomeIcon
-                                                    icon={faCartPlus}
-                                                  />
-                                                </Button>
-                                              </div>
-                                            </Card.Body>
-                                          </Card>
+                                                  icon={faCartPlus}
+                                                />
+                                              </Button>
+                                            </div>
+                                          </Card.Body>
+                                        </Card>
                                       ))}
                                     </div>
                                     <div className="d-flex justify-content-between">

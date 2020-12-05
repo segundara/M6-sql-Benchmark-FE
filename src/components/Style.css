@@ -23,18 +23,23 @@ a {
 
 .productCard {
   border: none !important;
-  margin-bottom: 3rem;
-  margin-right: 1.3rem;
+  margin-right: 0.2rem;
+  margin-left: 0.2rem;
   transition: transform 1s;
+  z-index: 1;
+}
+
+.card-img, .card-img-bottom, .card-img-top {
+  width: 60% !important;
+  margin: auto;
 }
 
 .productCard:hover {
   transform: scale(1.1);
-  padding: 5px;
-  border: 1px solid #0ce06a3b !important;
   border-radius: 10px;
   box-shadow: 5px 5px 3px #17a2b8, 10px 10px 3px #0ce06a73,
     15px 15px 3px #0ce06a3b;
+    z-index: 5;
 }
 
 .detail {
