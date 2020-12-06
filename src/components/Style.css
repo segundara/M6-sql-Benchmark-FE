@@ -32,7 +32,7 @@ a {
 }
 
 .inStore{
-  padding-top: 3%;
+  padding-top: 1rem;
 }
 
 .detail {
@@ -99,8 +99,8 @@ a {
 }
 
 .inStore{
-  padding-top: 3%;
-  padding-left: 3%;
+  padding-top: 2rem;
+  padding-left: 2rem;
 }
 
 .mainPageFooter{
