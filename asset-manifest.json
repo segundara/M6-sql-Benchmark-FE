@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/M6-sql-Benchmark-FE/static/css/main.ada8b41f.chunk.css",
+    "main.css": "/M6-sql-Benchmark-FE/static/css/main.8a0995ef.chunk.css",
     "main.js": "/M6-sql-Benchmark-FE/static/js/main.a19202c0.chunk.js",
     "main.js.map": "/M6-sql-Benchmark-FE/static/js/main.a19202c0.chunk.js.map",
     "runtime-main.js": "/M6-sql-Benchmark-FE/static/js/runtime-main.ae5d6baa.js",
@@ -9,10 +9,10 @@
     "static/js/2.2692c1f1.chunk.js": "/M6-sql-Benchmark-FE/static/js/2.2692c1f1.chunk.js",
     "static/js/2.2692c1f1.chunk.js.map": "/M6-sql-Benchmark-FE/static/js/2.2692c1f1.chunk.js.map",
     "index.html": "/M6-sql-Benchmark-FE/index.html",
-    "precache-manifest.34d4ddbf5659f1a3ea8ab05b668b0060.js": "/M6-sql-Benchmark-FE/precache-manifest.34d4ddbf5659f1a3ea8ab05b668b0060.js",
+    "precache-manifest.37ee886e7f9604e14ea1127756d587d1.js": "/M6-sql-Benchmark-FE/precache-manifest.37ee886e7f9604e14ea1127756d587d1.js",
     "service-worker.js": "/M6-sql-Benchmark-FE/service-worker.js",
     "static/css/2.2a86faee.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/2.2a86faee.chunk.css.map",
-    "static/css/main.ada8b41f.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/main.ada8b41f.chunk.css.map",
+    "static/css/main.8a0995ef.chunk.css.map": "/M6-sql-Benchmark-FE/static/css/main.8a0995ef.chunk.css.map",
     "static/js/2.2692c1f1.chunk.js.LICENSE.txt": "/M6-sql-Benchmark-FE/static/js/2.2692c1f1.chunk.js.LICENSE.txt",
     "static/media/logo.svg": "/M6-sql-Benchmark-FE/static/media/logo.5d5d9eef.svg"
   },
@@ -20,7 +20,7 @@
     "static/js/runtime-main.ae5d6baa.js",
     "static/css/2.2a86faee.chunk.css",
     "static/js/2.2692c1f1.chunk.js",
-    "static/css/main.ada8b41f.chunk.css",
+    "static/css/main.8a0995ef.chunk.css",
     "static/js/main.a19202c0.chunk.js"
   ]
 }
