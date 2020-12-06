@@ -146,7 +146,7 @@ class Details extends Component {
                     {this.state.product && (
                         <>
                             <Col md={3} className="mt-5">
-                                <Image src={this.state.product.image_url} style={{ height: "50vh", width: "20rem" }} />
+                                <Image src={this.state.product.image_url} style={{ height: "20rem", width: "20rem" }} />
                             </Col>
                             <Col md={7} className="mt-5 detail">
                                 <div className="w-50">

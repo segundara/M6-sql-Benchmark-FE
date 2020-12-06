@@ -67,7 +67,7 @@ a {
 }
 
 .card-img, .card-img-bottom, .card-img-top {
-  width: 60% !important;
+  width: 50% !important;
   margin: auto;
 }
 
@@ -99,8 +99,13 @@ a {
 }
 
 .inStore{
-padding-top: 3%;
-padding-left: 3%;
+  padding-top: 3%;
+  padding-left: 3%;
+}
+
+.mainPageFooter{
+  padding-left: 2rem;
+  padding-right: 5rem;
 }
 
 }

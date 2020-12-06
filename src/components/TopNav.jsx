@@ -23,7 +23,7 @@ class NavBar extends React.Component {
                         <Link to="/backoffice"
                             className={
                                 this.props.location.pathname === '/backoffice'
-                                    ? "nav-link active"
+                                    ? "nav-link active shadow-lg border-bottom"
                                     : "nav-link"
                             }
                         >

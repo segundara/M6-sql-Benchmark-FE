@@ -237,18 +237,16 @@ class Products extends React.Component {
                                         <Card.Img
                                           variant="top"
                                           src={product.image_url}
-                                          height="35%"
+                                          height="40%"
                                         />
                                         <Card.Body>
                                           <Card.Title>
                                             {product.name}
                                           </Card.Title>
-                                          {/* <div className="d-flex justify-content-between"> */}
                                           <label>
                                             Brand: {product.brand}
                                           </label>
                                           <h4> €{product.price}</h4>
-                                          {/* </div> */}
                                           <div className="d-flex justify-content-between">
                                             <Button
                                               variant="info"
@@ -279,7 +277,7 @@ class Products extends React.Component {
                                       </Card>
                                     ))}
                                   </div>
-                                  <div className="d-flex justify-content-between">
+                                  <div className="d-flex justify-content-between mt-2 mainPageFooter">
                                     <Pagination
                                       threeDots
                                       totalPages={
@@ -298,7 +296,6 @@ class Products extends React.Component {
 
                                     <Alert
                                       variant="light"
-                                      className="text-right"
                                     >
                                       page{" "}
                                       <strong>
