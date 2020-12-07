@@ -131,16 +131,6 @@ class Details extends Component {
         this.fetchDetails()
     }
 
-    deleteReview = async (id) => {
-        const resp = await fetch(`${process.env.REACT_APP_API_URL}/reviews/` + id, {
-            method: "DELETE"
-        })
-
-        this.fetchDetails()
-
-    }
-
-
     render() {
         console.log(this.state.reviews)
         console.log(this.state.product)
@@ -180,18 +170,15 @@ class Details extends Component {
                                                     <>
                                                         {this.state.reviews.map(review =>
                                                             <Card.Body key={review._id}>
-                                                                <ReactStars
-                                                                    value={review.rate}
-                                                                    size={24}
-                                                                    edit={false}
-                                                                />
-                                                                {review.comment}
+                                                                <div className="border-bottom">
+                                                                    <ReactStars
+                                                                        value={review.rate}
+                                                                        size={24}
+                                                                        edit={false}
+                                                                    />
+                                                                    {review.comment}
+                                                                </div>
 
-                                                                <Button
-                                                                    className="ml-3"
-                                                                    variant="danger"
-                                                                    onClick={() => this.deleteReview(review._id)}
-                                                                >Delete</Button>
                                                             </Card.Body>
                                                         )}
                                                     </>
