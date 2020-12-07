@@ -39,6 +39,8 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 
+[![Product Name Screen Shot][product-screenshot]](https://segundara.github.io/M6-sql-Benchmark-FE)
+
 This project is an online store.
 The system makes use of [stripe-payment-api](https://stripe.com/en-fi) and postgreSQL as the database.
 
@@ -109,3 +111,4 @@ Project Link: [https://github.com/segundara/M6-sql-Benchmark-FE](https://github.
 [issues-url]: https://github.com/segundara/M6-sql-Benchmark-FE/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/olusegunemmanuelokedara/
+[product-screenshot]: https://github.com/segundara/M6-sql-Benchmark-FE/blob/main/public/M6_FE_Capture.PNG
