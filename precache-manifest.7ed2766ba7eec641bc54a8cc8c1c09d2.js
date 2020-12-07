@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "6ef1bf580d00e4215d7c30da9b618528",
+    "revision": "14456fd2e8c6d3956ad3d39f04b202b6",
     "url": "/M6-sql-Benchmark-FE/index.html"
   },
   {
-    "revision": "b77a2cfc444b264c13db",
+    "revision": "47363a2c576d10beb3e5",
     "url": "/M6-sql-Benchmark-FE/static/css/2.2a86faee.chunk.css"
   },
   {
-    "revision": "72408c0c90c2c6fe7d9a",
+    "revision": "35c47272273ae55ff623",
     "url": "/M6-sql-Benchmark-FE/static/css/main.8a0995ef.chunk.css"
   },
   {
-    "revision": "b77a2cfc444b264c13db",
-    "url": "/M6-sql-Benchmark-FE/static/js/2.2692c1f1.chunk.js"
+    "revision": "47363a2c576d10beb3e5",
+    "url": "/M6-sql-Benchmark-FE/static/js/2.b3a6d5b3.chunk.js"
   },
   {
     "revision": "434eeea35bf11e3d22931f972c8fbb4c",
-    "url": "/M6-sql-Benchmark-FE/static/js/2.2692c1f1.chunk.js.LICENSE.txt"
+    "url": "/M6-sql-Benchmark-FE/static/js/2.b3a6d5b3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "72408c0c90c2c6fe7d9a",
-    "url": "/M6-sql-Benchmark-FE/static/js/main.a19202c0.chunk.js"
+    "revision": "35c47272273ae55ff623",
+    "url": "/M6-sql-Benchmark-FE/static/js/main.0fef22c1.chunk.js"
   },
   {
     "revision": "5a751088bcff4cb9bf8b",
