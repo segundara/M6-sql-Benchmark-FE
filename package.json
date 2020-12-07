@@ -20,6 +20,7 @@
     "react-bootstrap-4-pagination": "^1.0.3",
     "react-content-loader": "^5.1.4",
     "react-dom": "^16.13.1",
+    "react-rating-stars-component": "^2.2.0",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.1",
     "serve": "^11.3.2"

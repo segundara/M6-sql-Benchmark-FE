@@ -17,6 +17,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleUp, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 import { useAccordionToggle } from "react-bootstrap/AccordionToggle";
 import AccordionContext from "react-bootstrap/AccordionContext";
+import ReactStars from "react-rating-stars-component";
 
 
 function CustomToggle({ children, eventKey, callback }) {
@@ -58,27 +59,27 @@ class Details extends Component {
         productid: null,
         addReview: false,
         editModal: false,
-        newReview: {
-            comment: "",
+        newReviewComment: {
+            comment: ""
+        },
+        newReviewRate: {
             rate: 1
         },
         reviews: [],
         photo: ''
     }
 
-    handleChange = (e) => {
-        const newReview = this.state.newReview
-        if (e.currentTarget.id === "rate") {
-            newReview[e.currentTarget.id] = parseInt(e.currentTarget.value)
-        }
-        else {
-            newReview[e.currentTarget.id] = e.currentTarget.value
-        }
-
+    handleComment = (e) => {
         this.setState({
-            newReview
+            newReviewComment: { comment: e.currentTarget.value }
         });
     }
+
+    handleRating = (newRating) => {
+        this.setState({
+            newReviewRate: { rate: parseInt(newRating) }
+        });
+    };
 
     fetchDetails = async () => {
         const resp = await fetch(`${process.env.REACT_APP_API_URL}/products/` + this.props.match.params.id)
@@ -99,8 +100,9 @@ class Details extends Component {
 
     addReview = async (e) => {
         e.preventDefault()
+        console.log(this.state.newReview)
 
-        const reviewBody = ({ ...this.state.newReview, "productid": this.props.match.params.id })
+        const reviewBody = ({ ...this.state.newReviewComment, ...this.state.newReviewRate, "productid": this.props.match.params.id })
 
         const resp = await fetch(`${process.env.REACT_APP_API_URL}/reviews`, {
             method: "POST",
@@ -113,9 +115,11 @@ class Details extends Component {
 
             this.setState({
                 addReview: false,
-                newReview: {
-                    comment: "",
-                    rate: null
+                newReviewComment: {
+                    comment: ""
+                },
+                newReviewRate: {
+                    rate: 1
                 },
             });
 
@@ -176,16 +180,18 @@ class Details extends Component {
                                                     <>
                                                         {this.state.reviews.map(review =>
                                                             <Card.Body key={review._id}>
-                                                                <Badge variant="info">{review.rate}</Badge> : {review.comment}
+                                                                <ReactStars
+                                                                    value={review.rate}
+                                                                    size={24}
+                                                                    edit={false}
+                                                                />
+                                                                {review.comment}
+
                                                                 <Button
                                                                     className="ml-3"
                                                                     variant="danger"
                                                                     onClick={() => this.deleteReview(review._id)}
                                                                 >Delete</Button>
-                                                                {/* <Button
-                                                                        className="ml-3"
-                                                                        variant="warning"
-                                                                    >Edit</Button> */}
                                                             </Card.Body>
                                                         )}
                                                     </>
@@ -202,10 +208,12 @@ class Details extends Component {
                 </Row>
                 <Modal show={this.state.addReview} onHide={() => this.setState({
                     addReview: false,
-                    newReview: {
-                        comment: "",
-                        rate: null,
-                        productid: null
+                    productid: null,
+                    newReviewComment: {
+                        comment: ""
+                    },
+                    newReviewRate: {
+                        rate: 1
                     }
                 })}>
                     <Modal.Body>
@@ -215,8 +223,8 @@ class Details extends Component {
                                     <Form.Group controlId="comment">
                                         <Form.Label>Comment</Form.Label>
                                         <Form.Control
-                                            value={this.state.newReview.comment}
-                                            onChange={this.handleChange}
+                                            value={this.state.newReviewComment.comment}
+                                            onChange={this.handleComment}
                                             type="text"
                                             placeholder="Your comment for the product" />
                                     </Form.Group>
@@ -224,14 +232,14 @@ class Details extends Component {
                             </Row>
                             <Row className="d-flex justify-content-center">
                                 <Col md={8}>
-                                    <Form.Group controlId="rate">
-                                        <Form.Label>Rate the product</Form.Label>
-                                        <Form.Control
-                                            type="number"
-                                            value={this.state.newReview.rate}
-                                            onChange={this.handleChange}
-                                            placeholder="Rate between 1-5" />
-                                    </Form.Group>
+                                    <Form.Label>Rate the product</Form.Label>
+                                    <ReactStars
+                                        count={5}
+                                        value={this.state.newReviewRate.rate}
+                                        onChange={this.handleRating}
+                                        size={24}
+                                        activeColor="#ffd700"
+                                    />
                                 </Col>
                             </Row>
                             <div className="d-flex justify-content-center">
