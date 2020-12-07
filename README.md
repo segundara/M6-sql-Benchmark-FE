@@ -111,4 +111,4 @@ Project Link: [https://github.com/segundara/M6-sql-Benchmark-FE](https://github.
 [issues-url]: https://github.com/segundara/M6-sql-Benchmark-FE/issues
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=flat-square&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/olusegunemmanuelokedara/
-[product-screenshot]: https://github.com/segundara/M6-sql-Benchmark-FE/blob/main/public/M6_FE_Capture.PNG
+[product-screenshot]: https://github.com/segundara/M6-sql-Benchmark-FE/blob/master/public/M6_FE_Capture.PNG
