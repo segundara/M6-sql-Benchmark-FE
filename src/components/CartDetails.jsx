@@ -14,13 +14,24 @@ class CartDetails extends React.Component {
     this.props.history.push("/payments")
   };
 
-  removeFromCart = async (productID) => {
+  removeFromCart = async (productID, productQuantity) => {
     const url = `${process.env.REACT_APP_API_URL}/cart/1/${productID}`;
-    const resp = await fetch(url, {
-      method: "DELETE",
-    });
-    if (resp.ok) {
-      this.showCartDetails()
+    if (productQuantity > 1) {
+      const resp = await fetch(url, {
+        method: "DELETE",
+      });
+      if (resp.ok) {
+        this.showCartDetails()
+      }
+    }
+    else {
+      const resp = await fetch(url, {
+        method: "DELETE",
+      });
+      if (resp.ok) {
+        this.showCartDetails()
+        this.props.reduceCartNumber(productID);
+      }
     }
 
   }
@@ -40,6 +51,12 @@ class CartDetails extends React.Component {
           cartTotal: totalAmount,
         });
         console.log(totalArray);
+      }
+      else {
+        this.setState({
+          cartItems: [],
+          cartTotal: 0,
+        });
       }
     }
   }
@@ -74,7 +91,7 @@ class CartDetails extends React.Component {
                   <th>
                     <Button
                       variant="danger"
-                      onClick={() => this.removeFromCart(item._id)}
+                      onClick={() => this.removeFromCart(item._id, item.quantity)}
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </Button>

@@ -25,6 +25,11 @@ class App extends React.Component {
     }
   };
 
+  reduceCartNumber = (productid) => {
+    const idArray = this.state.productidArray.filter(id => id !== productid);
+    this.setState({ productidArray: idArray, count: this.state.count - 1 });
+  };
+
   emptyCart = (value) => {
     this.setState({ count: value });
   };
@@ -35,6 +40,7 @@ class App extends React.Component {
 
   render() {
     console.log(this.state.productidArray);
+    console.log(this.state.count);
     return (
       <Router>
         <Navbar updateProductInCart={this.state.count} />
@@ -50,7 +56,7 @@ class App extends React.Component {
           render={(props) => <Stripe {...props} paymentTotal={this.state.paymentTotal} emptyCart={this.emptyCart} />} />
         <Route
           path="/checkout"
-          render={(props) => <CartDetails {...props} paymentTotal={this.setPayment} />}
+          render={(props) => <CartDetails {...props} paymentTotal={this.setPayment} reduceCartNumber={this.reduceCartNumber} />}
         />
         <Route path="/backoffice" component={Backoffice} />
       </Router>
