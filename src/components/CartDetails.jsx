@@ -83,29 +83,31 @@ class CartDetails extends React.Component {
             <tbody>
               {this.state.cartItems.map((item, i) => (
                 <tr key={i}>
-                  <th>{i + 1}</th>
-                  <th>{item.name}</th>
-                  <th>{item.unitary_price}</th>
-                  <th>{item.quantity}</th>
-                  <th>{item.total}</th>
-                  <th>
+                  <td>{i + 1}</td>
+                  <td>{item.name}</td>
+                  <td>{item.unitary_price}</td>
+                  <td>{item.quantity}</td>
+                  <td>{item.total}</td>
+                  <td>
                     <Button
                       variant="danger"
                       onClick={() => this.removeFromCart(item._id, item.quantity)}
                     >
                       <FontAwesomeIcon icon={faTrash} />
                     </Button>
-                  </th>
+                  </td>
                 </tr>
               ))}
+            </tbody>
+          </Table>
+          <br />
+          <Table bordered size="sm" variant="secondary">
+            <thead>
               <tr>
-                <th></th>
-                <th></th>
-                <th></th>
                 <th>Overall Total</th>
                 <th>€{this.state.cartTotal}</th>
               </tr>
-            </tbody>
+            </thead>
           </Table>
           <div className="d-flex justify-content-between">
             <Button variant="info" onClick={() => this.props.history.push(`${process.env.REACT_APP_HOMEPAGE}`)}>
