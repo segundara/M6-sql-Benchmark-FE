@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "706fb78849e1a66d6d03a0d281f3c8e5",
+    "revision": "682990ab55e04d507c6d7c14e556521a",
     "url": "/M6-sql-Benchmark-FE/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/M6-sql-Benchmark-FE/static/css/2.2a86faee.chunk.css"
   },
   {
-    "revision": "8518007a5792b72f4bc0",
+    "revision": "5d7cf4e750466e59d971",
     "url": "/M6-sql-Benchmark-FE/static/css/main.8a0995ef.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/M6-sql-Benchmark-FE/static/js/2.b3a6d5b3.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "8518007a5792b72f4bc0",
-    "url": "/M6-sql-Benchmark-FE/static/js/main.70087e52.chunk.js"
+    "revision": "5d7cf4e750466e59d971",
+    "url": "/M6-sql-Benchmark-FE/static/js/main.912e2e49.chunk.js"
   },
   {
     "revision": "5a751088bcff4cb9bf8b",
